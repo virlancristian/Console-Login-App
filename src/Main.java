@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        new Launcher().run();
+        Launcher launcher = Launcher.singleton();
+
+        launcher.run();
     }
 }

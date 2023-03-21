@@ -4,17 +4,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Launcher {
-    File launcher = new File("Launcher.bat");
-
-    public Launcher() {
-        if(!launcher.exists()) {
+    File launcherFile = new File("Launcher.bat");
+    static Launcher launcher = null;
+    private Launcher() {
+        if(!launcherFile.exists()) {
             try {
-                launcher.createNewFile();
-                writeLauncherInstructions(launcher);
+                launcherFile.createNewFile();
+                writeLauncherInstructions(launcherFile);
             } catch(IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static Launcher singleton() {
+        if(launcher == null) {
+            return new Launcher();
+        }
+
+        return launcher;
     }
 
     private void writeLauncherInstructions(File launcher) {
